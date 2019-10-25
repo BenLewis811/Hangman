@@ -1,0 +1,99 @@
+
+
+class hangman 
+{
+  
+  public static String firstWord;
+ 
+  public static void trueWord(String i)
+    {
+      firstWord = i;
+      
+    }
+    
+    public static void hang()
+    {
+     Scanner scan = new Scanner (System.in);
+     System.out.println("welcome to hangman\ntype the first word");
+    String bob = scan.nextLine();
+    trueWord(bob);
+       int count3;
+      
+      
+      
+      String wordGuess = "";
+  
+      char[] guessIncorrect = new char[11];
+      char[] realWord = firstWord.toCharArray();
+      int count = 0;
+      //astericks in word
+      for (int gibby = 0; gibby < firstWord.length(); gibby++)
+      {
+        realWord[gibby] = '*';
+      }
+      
+      
+      
+      
+      //loop to ask for guesses
+      while ( count < 10)
+      {
+        //prints info about information guessed 
+        System.out.println("\n");
+        System.out.print("Letters guessed incorectly ");
+        //prints the array of incorrect guesses
+        for (char Incorrect : guessIncorrect )
+        {
+        
+          System.out.print(Incorrect + " ");
+        }
+        
+        //asks for another guess
+        System.out.println("\nEnter one letter.");
+        String guess = scan.nextLine();
+       
+       //runs a loop to see if  any are equal
+         count3 = 0;
+        for (int count2 = 0 ; count2 < firstWord.length() ; count2++)
+        {
+          //sets it equal
+          if (firstWord.charAt(count2) == guess.charAt(0) )
+          {
+             
+            realWord[count2] = firstWord.charAt(count2);
+            count3++;
+          }
+          
+        }
+        //this makes sure that at least on letter was correct, if no letters were correct it runs
+        if (count3 == 0)
+        {
+          
+          count ++;
+          guessIncorrect[count] = guess.charAt(0);
+        
+        }
+        //prints astericks 
+       for ( char hi : realWord)
+      {
+         System.out.print(hi );
+        }
+        System.out.println("\nWrong Attemps " + count);
+        //tests to see if you got the word right
+        String finalGuess =  new String(realWord);
+        if (finalGuess.equals(firstWord))
+        {
+          System.out.println("You guessed it right");
+          break;
+        }
+        
+      }
+      //if you got it wrong too many times
+      if (count >= 10)
+      {
+      System.out.println("You failed.  The word was " + firstWord);
+      }
+  
+    }
+}
+
